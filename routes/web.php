@@ -17,3 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('show', 'EmployeesController@show');
+Route::get('delete/{id}', 'EmployeesController@destroy');
+Route::get('create', 'EmployeesController@create');
+Route::post('submit', 'EmployeesController@store');
+Route::get('edit/{id}', 'EmployeesController@edit');
+Route::post('update/{id}', 'EmployeesController@update');

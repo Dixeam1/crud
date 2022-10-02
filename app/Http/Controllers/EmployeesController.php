@@ -14,7 +14,7 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        //
+        return view('show');
     }
 
     /**
@@ -24,7 +24,7 @@ class EmployeesController extends Controller
      */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**
@@ -35,7 +35,14 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $res = new employees;
+        $res->name=$request->input('name');
+        $res->email=$request->input('email');
+        $res->phone=$request->input('phone');
+        $res->save();
+        $request->session()->flash('msg', 'Data Successfully Submitted!');
+        return redirect("show");
+        
     }
 
     /**
@@ -46,7 +53,7 @@ class EmployeesController extends Controller
      */
     public function show(employees $employees)
     {
-        return view('welcome');
+        return view('welcome')->with('employeeArr',employees::all());
     }
 
     /**
@@ -55,9 +62,10 @@ class EmployeesController extends Controller
      * @param  \App\employees  $employees
      * @return \Illuminate\Http\Response
      */
-    public function edit(employees $employees)
+    public function edit(employees $employees, $id)
     {
-        //
+        return view('edit')->with('employeeArr',employees::find($id));
+
     }
 
     /**
@@ -67,9 +75,15 @@ class EmployeesController extends Controller
      * @param  \App\employees  $employees
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, employees $employees)
+    public function update(Request $request, employees $employees, $id)
     {
-        //
+        $res =employees::find($request->id);
+        $res->name=$request->input('name');
+        $res->email=$request->input('email');
+        $res->phone=$request->input('phone');
+        $res->save();
+        $request->session()->flash('msg', 'Data Successfully updated!');
+        return redirect("show");
     }
 
     /**
@@ -78,8 +92,9 @@ class EmployeesController extends Controller
      * @param  \App\employees  $employees
      * @return \Illuminate\Http\Response
      */
-    public function destroy(employees $employees)
+    public function destroy(employees $employees, $id)
     {
-        //
+        employees::destroy(array('id',$id ));
+        return redirect("show");
     }
 }

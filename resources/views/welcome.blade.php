@@ -1,26 +1,39 @@
 @extends('layout')
 @section('content')
-    <div class="container">
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">NAME</th>
-                <th scope="col">GMAIL</th>
-                <th scope="col">PHONE</th>
-                <th scope="col">ACTION</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>1</th>
-                <th>1</th>
-                <th>1</th>
-                <th>1</th>
-                <th>1</th>
-              </tr>
-            </tbody>
-          </table>
+<div class="container">
+  <div class="alert alert-success"  role="alert">
+    {{session('msg')}}
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">NAME</th>
+        <th scope="col">GMAIL</th>
+        <th scope="col">PHONE</th>
+        <th scope="col">ACTION</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php 
 
-    </div>
+      $i = 1;
+
+      ?>
+      @foreach($employeeArr as $employee)
+      <tr>
+        <th>{{$i++}}</th>
+        <th>{{$employee->name}}</th>
+        <th>{{$employee->email}}</th>
+        <th>{{$employee->phone}}</th>
+        <th>
+          <a href="delete/{{$employee->id}}">Delete</a>
+          <a class="ml-4" href="edit/{{$employee->id}}">Edit</a>
+        </th>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
+
+</div>
 @endsection()
