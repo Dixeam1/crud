@@ -1,10 +1,12 @@
 @extends('layout')
 @section('content')
-<div class="container">
-  <div class="alert alert-success"  role="alert">
-    {{session('msg')}}
+<div class="container ">
+  <div class="alert-success">
+    <div class="ml-3">
+      {{session('msg')}}
+    </div>
   </div>
-  <table class="table">
+  <table class="table mt-4">
     <thead>
       <tr>
         <th scope="col">#</th>

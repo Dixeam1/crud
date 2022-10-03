@@ -54,6 +54,14 @@ class EmployeesController extends Controller
     public function show(employees $employees)
     {
         return view('welcome')->with('employeeArr',employees::all());
+        $search = $employees['search']??"";
+        if ($search!="") {
+            $customers = employeeArr::where('name','=', $search)->get();
+            print_r($customers);
+        }
+        else{
+            $customers = employeeArr::all();
+        }
     }
 
     /**

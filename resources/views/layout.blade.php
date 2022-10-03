@@ -25,12 +25,11 @@
             <li class="nav-item">
               <a class="nav-link" href="show">Show Record</a>
             </li>
-            
+           
           </ul>
           <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
+            <input class="form-control mr-sm-2 w-100"  type="search" placeholder="Search" name="search" aria-label="Search">
+          </form> 
         </div>
       </nav>
       @yield('content')
