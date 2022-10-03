@@ -22,3 +22,4 @@ Route::get('create', 'EmployeesController@create');
 Route::post('submit', 'EmployeesController@store');
 Route::get('edit/{id}', 'EmployeesController@edit');
 Route::post('update/{id}', 'EmployeesController@update');
+Route::get('search', 'EmployeesController@search');

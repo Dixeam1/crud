@@ -12,9 +12,15 @@ class EmployeesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('show');
+        $project = Project::query();
+        if (@$request->search) {
+            $project->where('name', 'Like', '%' . request('search') . '%');
+        }
+
+        return $project->orderBy('id',)->paginate(10);
+        // return view('show');
     }
 
     /**
@@ -25,6 +31,13 @@ class EmployeesController extends Controller
     public function create()
     {
         return view('create');
+    }
+    public function search(Request $request)
+    {
+        // $search = $request->get('search');
+        // $posts = DB::table('employees')->where('name', 'like', '%'.$search.'%');
+        // return view('show', ['employees' => $posts]);
+
     }
 
     /**
@@ -51,17 +64,15 @@ class EmployeesController extends Controller
      * @param  \App\employees  $employees
      * @return \Illuminate\Http\Response
      */
-    public function show(employees $employees)
+    public function show(Request $request, employees $employees)
     {
-        return view('welcome')->with('employeeArr',employees::all());
-        $search = $employees['search']??"";
-        if ($search!="") {
-            $customers = employeeArr::where('name','=', $search)->get();
-            print_r($customers);
+        // dd($);
+        $data = [];
+        $data['employeeArr'] = employees::all();
+        if($request->search){
+            $data['employeeArr'] = employees::where('name', 'LIKE', '%' . $request->search . '%')->get();
         }
-        else{
-            $customers = employeeArr::all();
-        }
+        return view('welcome', $data);
     }
 
     /**
