@@ -14,13 +14,7 @@ class EmployeesController extends Controller
      */
     public function index(Request $request)
     {
-        $project = Project::query();
-        if (@$request->search) {
-            $project->where('name', 'Like', '%' . request('search') . '%');
-        }
-
-        return $project->orderBy('id',)->paginate(10);
-        // return view('show');
+        //
     }
 
     /**
@@ -32,13 +26,7 @@ class EmployeesController extends Controller
     {
         return view('create');
     }
-    public function search(Request $request)
-    {
-        // $search = $request->get('search');
-        // $posts = DB::table('employees')->where('name', 'like', '%'.$search.'%');
-        // return view('show', ['employees' => $posts]);
-
-    }
+    
 
     /**
      * Store a newly created resource in storage.
