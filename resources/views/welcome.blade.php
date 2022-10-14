@@ -13,6 +13,7 @@
   <thead>
     <tr>
       <th scope="col">#</th>
+      <th scope="col">Images</th>
       <th scope="col">NAME</th>
       <th scope="col">GMAIL</th>
       <th scope="col">PHONE</th>
@@ -28,6 +29,7 @@
     @foreach($employeeArr as $employee)
     <tr>
       <th>{{$i++}}</th>
+      <th><img src="storage/app/public/{{$employee->images}}"></th>
       <th>{{$employee->name}}</th>
       <th>{{$employee->email}}</th>
       <th>{{$employee->phone}}</th>

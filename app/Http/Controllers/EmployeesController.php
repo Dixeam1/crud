@@ -40,6 +40,17 @@ class EmployeesController extends Controller
         $res->name=$request->input('name');
         $res->email=$request->input('email');
         $res->phone=$request->input('phone');
+
+        if($request->hasfile('img'))
+        {
+            $file = $request->file('img');
+            $extension =$file->getClientOriginalExtension();
+            $filename = time().'.'. $extension;
+            $file->move('storage\app\public',$filename);
+            $res->images = $filename;
+        }
+
+
         $res->save();
         $request->session()->flash('msg', 'Data Successfully Submitted!');
         return redirect("show");
